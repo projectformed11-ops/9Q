@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)file:///C:/Users/Admin/Downloads/index%20(4).html -->
+<html lang="th"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>แบบประเมินโรคซึมเศร้า 9Q</title>
+<link href="./index_files/css2" rel="stylesheet">
+<style>
+:root{--bg:#fff4f0;--card:#ffffff;--ink:#4a2c17;--muted:#8a6a55;--pink:#f4a6bd;--pink-s:#fde3ea;--yellow:#ffd25e;--yellow-s:#fff3c4;--brown:#7a4a2a;--line:#f0d5c8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a1a12;--card:#3a2519;--ink:#fbeadf;--muted:#d1b3a0;--pink-s:#5a2e3d;--yellow-s:#4f4217;--line:#5b4030}}
+:root[data-theme="dark"]{--bg:#2a1a12;--card:#3a2519;--ink:#fbeadf;--muted:#d1b3a0;--pink-s:#5a2e3d;--yellow-s:#4f4217;--line:#5b4030}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Sarabun",system-ui,sans-serif;line-height:1.6}
+.wrap{max-width:760px;margin:0 auto;padding:20px 14px 60px}
+header{background:linear-gradient(135deg,var(--pink),var(--yellow));border-radius:20px;padding:24px;text-align:center;color:#4a2c17;box-shadow:0 6px 18px rgba(122,74,42,.18)}
+h1{margin:0 0 6px;font-size:1.6rem}
+header p{margin:0;font-size:.95rem}
+.bar{height:10px;background:var(--pink-s);border-radius:99px;margin:18px 0;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--yellow));transition:width .3s}
+.q{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+.q.missing{border-color:#d9534f}
+.q h3{margin:0 0 10px;font-size:1.02rem;color:var(--brown)}
+.q h3 b{background:var(--yellow);color:#4a2c17;border-radius:50%;display:inline-block;width:1.8em;height:1.8em;text-align:center;line-height:1.8em;margin-right:8px;font-size:.9rem}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .q h3{color:var(--yellow)}}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+.opts label{cursor:pointer}
+.opts input{position:absolute;opacity:0}
+.opts span{display:block;text-align:center;padding:10px 6px;border-radius:12px;background:var(--pink-s);border:2px solid transparent;font-size:.9rem;transition:.15s}
+.opts input:checked+span{background:var(--yellow);border-color:var(--brown);font-weight:700;color:#4a2c17}
+.opts input:focus-visible+span{outline:3px solid var(--brown)}
+button{font:inherit;cursor:pointer;border:0;border-radius:14px;padding:12px 22px;font-weight:700}
+.go{background:var(--brown);color:#fff;width:100%;font-size:1.1rem}
+.go:hover{filter:brightness(1.1)}
+.ghost{background:var(--pink-s);color:var(--ink)}
+.err{color:#d9534f;font-weight:600;text-align:center;min-height:1.5em}
+#out{display:none;margin-top:22px}
+.res{background:var(--yellow-s);border:2px solid var(--yellow);border-radius:16px;padding:16px;margin-bottom:14px}
+.alert{background:#ffe3e3;color:#7a1d1d;border:2px solid #d9534f;border-radius:14px;padding:14px;margin-bottom:14px;font-weight:600}
+textarea{width:100%;height:340px;border-radius:14px;border:2px solid var(--line);padding:14px;background:var(--card);color:var(--ink);font:inherit;font-size:.9rem;resize:vertical}
+.row{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+.row button{flex:1}
+small{display:block;text-align:center;color:var(--muted);margin-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><h1>🌸 แบบประเมินโรคซึมเศร้า (9Q)</h1><p>ในช่วง 2 สัปดาห์ที่ผ่านมา คุณมีอาการเหล่านี้บ่อยแค่ไหน? โปรดตอบให้ครบทุกข้อ</p></header>
+<div class="bar"><i id="pb" style="width: 11.1111%;"></i></div>
+<div id="qs"><div class="q" id="q0"><h3><b>1</b>เบื่อ ไม่สนใจอยากทำอะไร</h3><div class="opts"><label><input type="radio" name="q0" value="0"><span>ไม่มีเลย <small style="display:inline;margin:0;color:inherit">(0 คะแนน)</small></span></label><label><input type="radio" name="q0" value="1"><span>เป็นบางวัน (1-7 วัน) <small style="display:inline;margin:0;color:inherit">(1 คะแนน)</small></span></label><label><input type="radio" name="q0" value="2"><span>เป็นบ่อย (&gt;7 วัน) <small style="display:inline;margin:0;color:inherit">(2 คะแนน)</small></span></label><label><input type="radio" name="q0" value="3"><span>เป็นทุกวัน <small style="display:inline;margin:0;color:inherit">(3 คะแนน)</small></span></label></div></div><div class="q" id="q1"><h3><b>2</b>ไม่สบายใจ ซึมเศร้า ท้อแท้</h3><div class="opts"><label><input type="radio" name="q1" value="0"><span>ไม่มีเลย <small style="display:inline;margin:0;color:inherit">(0 คะแนน)</small></span></label><label><input type="radio" name="q1" value="1"><span>เป็นบางวัน (1-7 วัน) <small style="display:inline;margin:0;color:inherit">(1 คะแนน)</small></span></label><label><input type="radio" name="q1" value="2"><span>เป็นบ่อย (&gt;7 วัน) <small style="display:inline;margin:0;color:inherit">(2 คะแนน)</small></span></label><label><input type="radio" name="q1" value="3"><span>เป็นทุกวัน <small style="display:inline;margin:0;color:inherit">(3 คะแนน)</small></span></label></div></div><div class="q" id="q2"><h3><b>3</b>หลับยาก หรือหลับๆ ตื่นๆ หรือหลับมากไป</h3><div class="opts"><label><input type="radio" name="q2" value="0"><span>ไม่มีเลย <small style="display:inline;margin:0;color:inherit">(0 คะแนน)</small></span></label><label><input type="radio" name="q2" value="1"><span>เป็นบางวัน (1-7 วัน) <small style="display:inline;margin:0;color:inherit">(1 คะแนน)</small></span></label><label><input type="radio" name="q2" value="2"><span>เป็นบ่อย (&gt;7 วัน) <small style="display:inline;margin:0;color:inherit">(2 คะแนน)</small></span></label><label><input type="radio" name="q2" value="3"><span>เป็นทุกวัน <small style="display:inline;margin:0;color:inherit">(3 คะแนน)</small></span></label></div></div><div class="q" id="q3"><h3><b>4</b>เหนื่อยง่าย หรือไม่ค่อยมีแรง</h3><div class="opts"><label><input type="radio" name="q3" value="0"><span>ไม่มีเลย <small style="display:inline;margin:0;color:inherit">(0 คะแนน)</small></span></label><label><input type="radio" name="q3" value="1"><span>เป็นบางวัน (1-7 วัน) <small style="display:inline;margin:0;color:inherit">(1 คะแนน)</small></span></label><label><input type="radio" name="q3" value="2"><span>เป็นบ่อย (&gt;7 วัน) <small style="display:inline;margin:0;color:inherit">(2 คะแนน)</small></span></label><label><input type="radio" name="q3" value="3"><span>เป็นทุกวัน <small style="display:inline;margin:0;color:inherit">(3 คะแนน)</small></span></label></div></div><div class="q" id="q4"><h3><b>5</b>เบื่ออาหารหรือกินมากเกินไป</h3><div class="opts"><label><input type="radio" name="q4" value="0"><span>ไม่มีเลย <small style="display:inline;margin:0;color:inherit">(0 คะแนน)</small></span></label><label><input type="radio" name="q4" value="1"><span>เป็นบางวัน (1-7 วัน) <small style="display:inline;margin:0;color:inherit">(1 คะแนน)</small></span></label><label><input type="radio" name="q4" value="2"><span>เป็นบ่อย (&gt;7 วัน) <small style="display:inline;margin:0;color:inherit">(2 คะแนน)</small></span></label><label><input type="radio" name="q4" value="3"><span>เป็นทุกวัน <small style="display:inline;margin:0;color:inherit">(3 คะแนน)</small></span></label></div></div><div class="q" id="q5"><h3><b>6</b>รู้สึกไม่ดีกับตนเอง คิดว่าตัวเองล้มเหลว หรือครอบครัวผิดหวัง</h3><div class="opts"><label><input type="radio" name="q5" value="0"><span>ไม่มีเลย <small style="display:inline;margin:0;color:inherit">(0 คะแนน)</small></span></label><label><input type="radio" name="q5" value="1"><span>เป็นบางวัน (1-7 วัน) <small style="display:inline;margin:0;color:inherit">(1 คะแนน)</small></span></label><label><input type="radio" name="q5" value="2"><span>เป็นบ่อย (&gt;7 วัน) <small style="display:inline;margin:0;color:inherit">(2 คะแนน)</small></span></label><label><input type="radio" name="q5" value="3"><span>เป็นทุกวัน <small style="display:inline;margin:0;color:inherit">(3 คะแนน)</small></span></label></div></div><div class="q" id="q6"><h3><b>7</b>สมาธิไม่ดี เวลาทำอะไร เช่น ดูโทรทัศน์ ฟังวิทยุ หรือทำงานที่ต้องใช้ความตั้งใจ</h3><div class="opts"><label><input type="radio" name="q6" value="0"><span>ไม่มีเลย <small style="display:inline;margin:0;color:inherit">(0 คะแนน)</small></span></label><label><input type="radio" name="q6" value="1"><span>เป็นบางวัน (1-7 วัน) <small style="display:inline;margin:0;color:inherit">(1 คะแนน)</small></span></label><label><input type="radio" name="q6" value="2"><span>เป็นบ่อย (&gt;7 วัน) <small style="display:inline;margin:0;color:inherit">(2 คะแนน)</small></span></label><label><input type="radio" name="q6" value="3"><span>เป็นทุกวัน <small style="display:inline;margin:0;color:inherit">(3 คะแนน)</small></span></label></div></div><div class="q" id="q7"><h3><b>8</b>พูดช้า ทำอะไรช้าลง จนคนอื่นสังเกตเห็นได้ หรือกระสับกระส่าย ไม่สามารถอยู่นิ่งได้เหมือนที่เคยเป็น</h3><div class="opts"><label><input type="radio" name="q7" value="0"><span>ไม่มีเลย <small style="display:inline;margin:0;color:inherit">(0 คะแนน)</small></span></label><label><input type="radio" name="q7" value="1"><span>เป็นบางวัน (1-7 วัน) <small style="display:inline;margin:0;color:inherit">(1 คะแนน)</small></span></label><label><input type="radio" name="q7" value="2"><span>เป็นบ่อย (&gt;7 วัน) <small style="display:inline;margin:0;color:inherit">(2 คะแนน)</small></span></label><label><input type="radio" name="q7" value="3"><span>เป็นทุกวัน <small style="display:inline;margin:0;color:inherit">(3 คะแนน)</small></span></label></div></div><div class="q" id="q8"><h3><b>9</b>คิดทำร้ายตนเอง หรือคิดว่าถ้าตายไปคงจะดี</h3><div class="opts"><label><input type="radio" name="q8" value="0"><span>ไม่มีเลย <small style="display:inline;margin:0;color:inherit">(0 คะแนน)</small></span></label><label><input type="radio" name="q8" value="1"><span>เป็นบางวัน (1-7 วัน) <small style="display:inline;margin:0;color:inherit">(1 คะแนน)</small></span></label><label><input type="radio" name="q8" value="2"><span>เป็นบ่อย (&gt;7 วัน) <small style="display:inline;margin:0;color:inherit">(2 คะแนน)</small></span></label><label><input type="radio" name="q8" value="3"><span>เป็นทุกวัน <small style="display:inline;margin:0;color:inherit">(3 คะแนน)</small></span></label></div></div></div>
+<div class="err" id="err"></div>
+<button class="go" id="gen">✨ สร้าง Prompt ผลการประเมิน</button>
+
+<div id="out">
+  <div id="alert"></div>
+  <div class="res" id="sum"></div>
+  <textarea id="prompt" readonly=""></textarea>
+  <div class="row"><button class="go" id="copy">📋 คัดลอก Prompt</button><button class="ghost" id="reset">ทำแบบประเมินใหม่</button></div>
+</div>
+<small>แบบคัดกรองเบื้องต้น ไม่ใช่การวินิจฉัยทางการแพทย์ หากกังวลควรปรึกษาแพทย์หรือผู้เชี่ยวชาญ</small>
+</div>
+<script>
+const Q=["เบื่อ ไม่สนใจอยากทำอะไร","ไม่สบายใจ ซึมเศร้า ท้อแท้","หลับยาก หรือหลับๆ ตื่นๆ หรือหลับมากไป","เหนื่อยง่าย หรือไม่ค่อยมีแรง","เบื่ออาหารหรือกินมากเกินไป","รู้สึกไม่ดีกับตนเอง คิดว่าตัวเองล้มเหลว หรือครอบครัวผิดหวัง","สมาธิไม่ดี เวลาทำอะไร เช่น ดูโทรทัศน์ ฟังวิทยุ หรือทำงานที่ต้องใช้ความตั้งใจ","พูดช้า ทำอะไรช้าลง จนคนอื่นสังเกตเห็นได้ หรือกระสับกระส่าย ไม่สามารถอยู่นิ่งได้เหมือนที่เคยเป็น","คิดทำร้ายตนเอง หรือคิดว่าถ้าตายไปคงจะดี"];
+const O=["ไม่มีเลย","เป็นบางวัน (1-7 วัน)","เป็นบ่อย (>7 วัน)","เป็นทุกวัน"];
+const $=id=>document.getElementById(id);
+$("qs").innerHTML=Q.map((t,i)=>`<div class="q" id="q${i}"><h3><b>${i+1}</b>${t}</h3><div class="opts">${O.map((o,s)=>`<label><input type="radio" name="q${i}" value="${s}"><span>${o} <small style="display:inline;margin:0;color:inherit">(${s} คะแนน)</small></span></label>`).join("")}</div></div>`).join("");
+function ans(){return Q.map((_,i)=>{const c=document.querySelector(`input[name=q${i}]:checked`);return c?+c.value:null})}
+function prog(){const a=ans().filter(v=>v!==null).length;$("pb").style.width=(a/9*100)+"%"}
+document.addEventListener("change",prog);
+function level(s){
+ if(s<=6)return["ไม่มีอาการของโรคซึมเศร้า หรือมีอาการระดับน้อยมาก","0-6"];
+ if(s<=12)return["มีอาการของโรคซึมเศร้า ระดับน้อย","7-12"];
+ if(s<=18)return["มีอาการของโรคซึมเศร้า ระดับปานกลาง","13-18"];
+ return["มีอาการของโรคซึมเศร้า ระดับรุนแรง","19-27"]}
+$("gen").onclick=()=>{
+ const a=ans();let miss=false;
+ a.forEach((v,i)=>{const m=v===null;$("q"+i).classList.toggle("missing",m);if(m&&!miss){miss=true;$("q"+i).scrollIntoView({behavior:"smooth",block:"center"})}});
+ if(miss){$("err").textContent="⚠️ กรุณาตอบให้ครบทั้ง 9 ข้อ";return}
+ $("err").textContent="";
+ const s=a.reduce((x,y)=>x+y,0),[lv,rg]=level(s),risk=a[8]>0;
+ $("alert").innerHTML=risk?`<div class="alert">💛 ข้อ 9 มีคะแนน ${a[8]}: คุณไม่ได้อยู่คนเดียว โปรดพูดคุยกับคนที่ไว้ใจหรือผู้เชี่ยวชาญโดยเร็ว สายด่วนสุขภาพจิต 1323 (24 ชม.) หรือฉุกเฉิน 1669</div>`:"";
+ $("sum").innerHTML=`<b>คะแนนรวม: ${s} / 27</b><br>ผลการประเมิน: ${lv}`;
+ const lines=Q.map((t,i)=>`ข้อ ${i+1}. ${t}\n   → ${O[a[i]]} (${a[i]} คะแนน)`).join("\n");
+ $("prompt").value=`คุณคือผู้เชี่ยวชาญด้านสุขภาพจิต พูดด้วยน้ำเสียงอบอุ่น เข้าใจ ไม่ตัดสิน และใช้ภาษาไทยที่เข้าใจง่าย
+
+ผู้ใช้ทำแบบประเมินโรคซึมเศร้า 9Q (ช่วง 2 สัปดาห์ที่ผ่านมา) ได้ผลดังนี้:
+
+${lines}
+
+สรุปผล
+- คะแนนรวม: ${s} / 27
+- ระดับ: ${lv} (ช่วงคะแนน ${rg})
+- ข้อ 9 (คิดทำร้ายตนเอง): ${risk?"มีคะแนน "+a[8]+" ⚠️ ต้องให้ความสำคัญเป็นอันดับแรก":"ไม่มี (0 คะแนน)"}
+
+สิ่งที่ต้องการให้คุณทำ
+1. สะท้อนความรู้สึกและให้กำลังใจผู้ใช้อย่างจริงใจ
+2. อธิบายความหมายของผลการประเมินเป็นภาษาง่ายๆ โดยย้ำว่านี่เป็นเพียงการคัดกรองเบื้องต้น ไม่ใช่การวินิจฉัย
+3. ชี้ข้อที่มีคะแนนสูง และแนะนำวิธีดูแลตนเองที่ทำได้จริง เช่น การนอน การกิน การออกกำลังกายเบาๆ การพูดคุยกับคนใกล้ชิด
+4. ${risk?"เนื่องจากข้อ 9 มีคะแนน ให้ถามไถ่ความปลอดภัยอย่างอ่อนโยนก่อน และแนะนำสายด่วนสุขภาพจิต 1323 (24 ชม.) หรือ 1669 กรณีฉุกเฉิน รวมถึงการไปพบแพทย์โดยเร็ว":(s>=7?"แนะนำให้พิจารณาพบแพทย์หรือนักจิตวิทยาเพื่อประเมินเพิ่มเติม":"แนะนำการเฝ้าระวังและดูแลสุขภาพจิตอย่างต่อเนื่อง")}
+5. ปิดท้ายด้วยคำถามปลายเปิด 1 ข้อ เพื่อให้ผู้ใช้เล่าความรู้สึกต่อ`;
+ $("out").style.display="block";$("out").scrollIntoView({behavior:"smooth"})};
+$("copy").onclick=async()=>{const b=$("copy");try{await navigator.clipboard.writeText($("prompt").value)}catch(e){$("prompt").select();try{document.execCommand("copy")}catch(_){}}
+ b.textContent="✅ คัดลอกแล้ว";setTimeout(()=>b.textContent="📋 คัดลอก Prompt",1800)};
+$("reset").onclick=()=>{document.querySelectorAll("input:checked").forEach(i=>i.checked=false);$("out").style.display="none";prog();window.scrollTo({top:0,behavior:"smooth"})};
+</script>
+
+
+</body></html>
