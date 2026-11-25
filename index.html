@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>แบบประเมินโรคซึมเศร้า (9Q)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* สัดส่วนสี 60 / 30 / 10 : ครีม / ชมพู / น้ำตาล */
+  :root {
+    --cream: #fcf7d9;   /* 60% พื้นหลังหลัก */
+    --pink:  #f6d8d6;   /* 30% การ์ด / พื้นที่รอง */
+    --brown: #604734;   /* 10% จุดเด่น: หัวข้อ ปุ่ม ตัวเลือกที่เลือก */
+    --brown-line: rgba(96, 71, 52, .22);
+    --radius: 18px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: "Noto Sans Thai", "Sarabun", system-ui, sans-serif;
+    background: var(--cream);
+    color: var(--brown);
+    line-height: 1.7;
+    font-size: 17px;
+  }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 28px 16px 64px; }
+  .hidden { display: none !important; }
+
+  header { text-align: center; margin-bottom: 22px; }
+  header h1 {
+    margin: 0 0 6px;
+    font-size: clamp(1.5rem, 4.5vw, 2rem);
+    font-weight: 700;
+  }
+  header .sub { margin: 0; opacity: .85; font-size: .95rem; }
+
+  .notice {
+    background: var(--pink);
+    border-left: 6px solid var(--brown);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: .92rem;
+    margin-bottom: 22px;
+  }
+
+  /* แถบความคืบหน้า */
+  .progress-box { margin-bottom: 20px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: .9rem; font-weight: 600; margin-bottom: 6px; }
+  .progress-track { height: 10px; background: var(--pink); border-radius: 99px; overflow: hidden; }
+  .progress-bar { height: 100%; width: 0; background: var(--brown); border-radius: 99px; transition: width .35s ease; }
+
+  /* การ์ดคำถาม */
+  .q-card {
+    background: var(--pink);
+    border-radius: var(--radius);
+    padding: 20px 20px 18px;
+    margin-bottom: 16px;
+    border: 2px solid transparent;
+    transition: border-color .2s;
+  }
+  .q-card.missing { border-color: var(--brown); animation: shake .35s; }
+  @keyframes shake { 25% { transform: translateX(-5px);} 75% { transform: translateX(5px);} }
+
+  .q-title { display: flex; gap: 12px; align-items: flex-start; margin: 0 0 14px; font-weight: 600; }
+  .q-num {
+    flex: none;
+    width: 34px; height: 34px;
+    display: grid; place-items: center;
+    background: var(--brown); color: var(--cream);
+    border-radius: 50%;
+    font-size: .95rem; font-weight: 700;
+  }
+
+  /* ตัวเลือกทั้ง 4 อยู่แถวเดียวกัน ความกว้างและความสูงเท่ากัน */
+  .options { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .opt { position: relative; display: flex; }
+  .opt input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+  .opt span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 58px;
+    text-align: center;
+    line-height: 1.35;
+    padding: 8px 6px;
+    border-radius: 12px;
+    background: var(--cream);
+    border: 2px solid var(--brown-line);
+    font-weight: 500;
+    font-size: .92rem;
+    transition: all .15s;
+  }
+  .opt:hover span { border-color: var(--brown); }
+  .opt input:focus-visible + span { outline: 3px solid var(--brown); outline-offset: 2px; }
+  .opt input:checked + span {
+    background: var(--brown);
+    color: var(--cream);
+    border-color: var(--brown);
+    font-weight: 700;
+  }
+
+  /* ปุ่ม */
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+  button {
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 13px 26px;
+    border-radius: 14px;
+    cursor: pointer;
+    border: 2px solid var(--brown);
+    transition: transform .1s, opacity .2s;
+  }
+  button:active { transform: scale(.97); }
+  .btn-primary { background: var(--brown); color: var(--cream); flex: 2 1 220px; }
+  .btn-primary:hover { opacity: .9; }
+  .btn-ghost { background: transparent; color: var(--brown); flex: 1 1 140px; }
+  .btn-ghost:hover { background: var(--pink); }
+
+  .error-msg { display: none; margin-top: 14px; font-weight: 600; background: var(--pink); border: 2px solid var(--brown); border-radius: 12px; padding: 10px 14px; }
+  .error-msg.show { display: block; }
+
+  /* ผลการประเมิน */
+  .score-card {
+    background: var(--pink);
+    border-radius: var(--radius);
+    padding: 28px 20px;
+    text-align: center;
+    border: 3px solid var(--brown);
+  }
+  .score-card .score-label { font-size: .95rem; opacity: .85; margin: 0; }
+  .score-card .score-num { font-size: 4rem; font-weight: 700; line-height: 1.1; margin: 4px 0; }
+  .score-card .score-max { font-size: 1.1rem; font-weight: 500; opacity: .75; }
+  .score-card .level {
+    display: inline-block;
+    background: var(--brown); color: var(--cream);
+    padding: 8px 20px; border-radius: 99px;
+    font-weight: 700; font-size: 1.1rem; margin: 6px 0 12px;
+  }
+  .score-card .advice { margin: 0; font-size: .98rem; }
+
+  .help-box {
+    margin-top: 16px;
+    background: var(--cream);
+    border: 2px solid var(--brown);
+    border-radius: 14px;
+    padding: 14px 18px;
+    font-size: .95rem;
+  }
+  .help-box.urgent { background: var(--brown); color: var(--cream); }
+  .help-box strong { font-size: 1.05rem; }
+  .help-box ul { margin: 6px 0 0; padding-left: 20px; }
+
+  .scale { margin-top: 16px; font-size: .88rem; opacity: .9; }
+  .scale ul { margin: 4px 0 0; padding-left: 20px; }
+
+  footer { text-align: center; margin-top: 40px; font-size: .85rem; opacity: .75; }
+
+  @media (max-width: 480px) {
+    body { font-size: 16px; }
+    .q-card { padding: 16px 12px; }
+    .options { gap: 6px; }
+    .opt span { font-size: .8rem; padding: 6px 3px; min-height: 64px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>แบบประเมินโรคซึมเศร้า (9Q)</h1>
+    <p class="sub" id="subText">ในช่วง 2 สัปดาห์ที่ผ่านมา รวมทั้งวันนี้ ท่านมีอาการเหล่านี้บ่อยแค่ไหน</p>
+  </header>
+
+  <!-- ===== มุมมองแบบฟอร์ม ===== -->
+  <div id="formView">
+    <div class="notice">
+      แบบประเมินนี้เป็นเพียงเครื่องมือคัดกรองเบื้องต้น ไม่ใช่การวินิจฉัยโรค
+      หากรู้สึกไม่ปลอดภัยหรือกำลังตกอยู่ในภาวะวิกฤต โปรดติดต่อ <strong>สายด่วนสุขภาพจิต 1323</strong>
+      หรือ <strong>1669</strong> (ฉุกเฉิน) ได้ตลอด 24 ชั่วโมง
+    </div>
+
+    <div class="progress-box">
+      <div class="progress-label"><span>ความคืบหน้า</span><span id="progressText">0 / 9</span></div>
+      <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+    </div>
+
+    <form id="form" novalidate>
+      <div id="questions"></div>
+      <div class="error-msg" id="errorMsg">กรุณาตอบคำถามให้ครบทุกข้อ (ข้อที่ยังไม่ได้ตอบถูกไฮไลต์ไว้)</div>
+      <div class="actions">
+        <button type="button" class="btn-primary" id="submitBtn">ดูผลการประเมิน</button>
+        <button type="button" class="btn-ghost" id="resetBtn">ล้างคำตอบ</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ===== มุมมองผลการประเมิน ===== -->
+  <div id="resultView" class="hidden">
+    <div class="score-card">
+      <p class="score-label">คะแนนรวม</p>
+      <div class="score-num"><span id="totalScore">0</span> <span class="score-max">/ 27</span></div>
+      <div class="level" id="levelText"></div>
+      <p class="advice" id="adviceText"></p>
+    </div>
+
+    <div class="help-box" id="helpBox"></div>
+
+    <div class="scale">
+      เกณฑ์การแปลผล
+      <ul>
+        <li>0–6 คะแนน : ไม่มีอาการของโรคซึมเศร้า หรือมีอาการระดับน้อยมาก</li>
+        <li>7–12 คะแนน : มีอาการของโรคซึมเศร้าระดับน้อย</li>
+        <li>13–18 คะแนน : มีอาการของโรคซึมเศร้าระดับปานกลาง</li>
+        <li>19–27 คะแนน : มีอาการของโรคซึมเศร้าระดับรุนแรง</li>
+      </ul>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn-primary" id="newBtn">ประเมินใหม่</button>
+    </div>
+  </div>
+
+  <footer>แบบประเมิน 9Q &middot; ใช้เพื่อการคัดกรองเบื้องต้นเท่านั้น</footer>
+</div>
+
+<script>
+  /* ---------- ข้อมูลคำถามและคะแนน ---------- */
+  var CHOICES = [
+    { label: "ไม่มีเลย", score: 0 },
+    { label: "เป็นบางวัน 1-7 วัน", score: 1 },
+    { label: "เป็นบ่อย &gt;7 วัน", score: 2 },
+    { label: "เป็นทุกวัน", score: 3 }
+  ];
+
+  var QUESTIONS = [
+    { id: "q1", no: "1", text: "เบื่อ ไม่สนใจอยากทำอะไร" },
+    { id: "q2", no: "2", text: "ไม่สบายใจ ซึมเศร้า ท้อแท้" },
+    { id: "q3", no: "3", text: "หลับยาก หรือหลับๆตื่นๆ หรือหลับมากไป" },
+    { id: "q4", no: "4", text: "เหนื่อยง่าย หรือไม่ค่อยมีแรง" },
+    { id: "q5", no: "5", text: "เบื่ออาหารหรือกินมากเกินไป" },
+    { id: "q6", no: "6", text: "รู้สึกไม่ดีกับตนเอง คิดว่าตัวเองล้มเหลว หรือครอบครัวผิดหวัง" },
+    { id: "q7", no: "7", text: "สมาธิไม่ดี เวลาทำอะไร เช่น ดูโทรทัศน์ ฟังวิทยุ หรือทำงานที่ต้องใช้ความตั้งใจ" },
+    { id: "q8", no: "8", text: "พูดช้า ทำอะไรช้าลง จนคนอื่นสังเกตเห็นได้ หรือกระสับกระส่าย ไม่สามารถอยู่นิ่งได้เหมือนที่เคยเป็น" },
+    { id: "q9", no: "9", text: "คิดทำร้ายตนเอง หรือคิดว่าถ้าตายไปคงจะดี" }
+  ];
+
+  var LEVELS = {
+    none: {
+      label: "ไม่มีอาการของโรคซึมเศร้า หรือมีอาการระดับน้อยมาก",
+      advice: "จากการประเมินนี้ยังไม่พบอาการของโรคซึมเศร้า หรือมีอาการน้อยมาก ควรดูแลสุขภาพกายและใจอย่างต่อเนื่อง และประเมินซ้ำหากมีอาการเปลี่ยนแปลง"
+    },
+    mild: {
+      label: "มีอาการของโรคซึมเศร้าระดับน้อย",
+      advice: "มีอาการของโรคซึมเศร้าระดับน้อย ควรดูแลตนเอง พักผ่อนให้เพียงพอ พูดคุยกับคนที่ไว้ใจ และติดตามอาการ หากไม่ดีขึ้นควรปรึกษาบุคลากรสุขภาพ"
+    },
+    moderate: {
+      label: "มีอาการของโรคซึมเศร้าระดับปานกลาง",
+      advice: "มีอาการของโรคซึมเศร้าระดับปานกลาง ควรปรึกษาแพทย์หรือบุคลากรสุขภาพจิตเพื่อประเมินและรับการดูแลที่เหมาะสม"
+    },
+    severe: {
+      label: "มีอาการของโรคซึมเศร้าระดับรุนแรง",
+      advice: "มีอาการของโรคซึมเศร้าระดับรุนแรง ควรพบแพทย์หรือจิตแพทย์โดยเร็ว เพื่อประเมินและรับการรักษา"
+    }
+  };
+
+  /* ---------- ตัวช่วย ---------- */
+  function $(id) { return document.getElementById(id); }
+
+  function optionsHTML(name) {
+    return CHOICES.map(function (o, i) {
+      return '<label class="opt">' +
+               '<input type="radio" name="' + name + '" value="' + i + '">' +
+               '<span>' + o.label + '</span>' +
+             '</label>';
+    }).join("");
+  }
+
+  function renderQuestions() {
+    $("questions").innerHTML = QUESTIONS.map(function (q) {
+      return '<div class="q-card" id="card-' + q.id + '">' +
+               '<p class="q-title"><span class="q-num">' + q.no + '</span><span>' + q.text + '</span></p>' +
+               '<div class="options">' + optionsHTML(q.id) + '</div>' +
+             '</div>';
+    }).join("");
+  }
+
+  /* ---------- อ่านค่าคำตอบ ---------- */
+  function getChoice(id) {
+    var el = document.querySelector('input[name="' + id + '"]:checked');
+    return el ? Number(el.value) : null;
+  }
+
+  function updateProgress() {
+    var done = 0;
+    QUESTIONS.forEach(function (q) { if (getChoice(q.id) !== null) done++; });
+    $("progressText").textContent = done + " / " + QUESTIONS.length;
+    $("progressBar").style.width = ((done / QUESTIONS.length) * 100) + "%";
+  }
+
+  /* ---------- ตรวจความครบถ้วน ---------- */
+  function validate() {
+    document.querySelectorAll(".missing").forEach(function (el) { el.classList.remove("missing"); });
+    var missing = [];
+    QUESTIONS.forEach(function (q) {
+      if (getChoice(q.id) === null) missing.push("card-" + q.id);
+    });
+    missing.forEach(function (id) { $(id).classList.add("missing"); });
+    return missing;
+  }
+
+  /* ---------- คำนวณคะแนน ---------- */
+  function calculate() {
+    var total = 0;
+    QUESTIONS.forEach(function (q) {
+      total += CHOICES[getChoice(q.id)].score;
+    });
+
+    var key = "none";
+    if (total >= 19) key = "severe";
+    else if (total >= 13) key = "moderate";
+    else if (total >= 7) key = "mild";
+
+    var q9 = CHOICES[getChoice("q9")].score;
+    return { total: total, key: key, level: LEVELS[key], q9: q9 };
+  }
+
+  /* ---------- แสดงผล ---------- */
+  function showResult(r) {
+    $("totalScore").textContent = r.total;
+    $("levelText").textContent = r.level.label;
+    $("adviceText").textContent = r.level.advice;
+
+    /* ข้อ 9 (คิดทำร้ายตนเอง) ตอบอะไรก็ตามที่ไม่ใช่ "ไม่มีเลย" หรือระดับรุนแรง ให้เน้นกล่องขอความช่วยเหลือ */
+    var urgent = r.key === "severe" || r.q9 > 0;
+    var help = $("helpBox");
+    help.className = "help-box" + (urgent ? " urgent" : "");
+    help.innerHTML =
+      "<strong>" + (urgent ? "ควรขอความช่วยเหลือ" : "ช่องทางขอความช่วยเหลือ") + "</strong>" +
+      "<ul>" +
+        (r.q9 > 0 ? "<li>ท่านตอบว่ามีความคิดทำร้ายตนเองหรือคิดว่าตายไปคงจะดี (ข้อ 9) ควรได้รับการประเมินความเสี่ยงการฆ่าตัวตายเพิ่มเติมด้วยแบบประเมิน 8Q โดยเร็ว</li>" : "") +
+        "<li>สายด่วนสุขภาพจิต <strong>1323</strong> (โทรฟรี 24 ชั่วโมง)</li>" +
+        "<li>บริการการแพทย์ฉุกเฉิน <strong>1669</strong></li>" +
+        (urgent ? "<li>อย่าอยู่คนเดียว ให้คนใกล้ชิดอยู่ด้วย และไปโรงพยาบาลที่ใกล้ที่สุด หากรู้สึกไม่ปลอดภัย</li>" : "") +
+      "</ul>";
+
+    $("formView").classList.add("hidden");
+    $("resultView").classList.remove("hidden");
+    $("subText").textContent = "ผลการประเมิน";
+    window.scrollTo(0, 0);
+  }
+
+  function showForm() {
+    $("resultView").classList.add("hidden");
+    $("formView").classList.remove("hidden");
+    $("subText").textContent = "ในช่วง 2 สัปดาห์ที่ผ่านมา รวมทั้งวันนี้ ท่านมีอาการเหล่านี้บ่อยแค่ไหน";
+    window.scrollTo(0, 0);
+  }
+
+  /* ---------- เหตุการณ์ ---------- */
+  function onSubmit(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    var err = $("errorMsg");
+    try {
+      var missing = validate();
+      if (missing.length) {
+        err.textContent = "กรุณาตอบคำถามให้ครบทุกข้อ (ข้อที่ยังไม่ได้ตอบถูกไฮไลต์ไว้)";
+        err.classList.add("show");
+        $(missing[0]).scrollIntoView({ behavior: "smooth", block: "center" });
+        return false;
+      }
+      err.classList.remove("show");
+      showResult(calculate());
+    } catch (ex) {
+      err.textContent = "เกิดข้อผิดพลาดในการคำนวณ: " + ex.message;
+      err.classList.add("show");
+    }
+    return false;
+  }
+
+  /* ไม่พึ่งการ submit ของฟอร์ม เพราะบางหน้าพรีวิวบล็อกไว้ */
+  $("submitBtn").addEventListener("click", onSubmit);
+  $("form").addEventListener("submit", onSubmit);
+
+  $("form").addEventListener("change", function () {
+    updateProgress();
+    $("errorMsg").classList.remove("show");
+  });
+
+  function resetAll() {
+    $("form").reset();
+    document.querySelectorAll(".missing").forEach(function (el) { el.classList.remove("missing"); });
+    $("errorMsg").classList.remove("show");
+    updateProgress();
+  }
+
+  $("resetBtn").addEventListener("click", function () {
+    resetAll();
+    window.scrollTo(0, 0);
+  });
+
+  $("newBtn").addEventListener("click", function () {
+    resetAll();
+    showForm();
+  });
+
+  /* เริ่มต้น */
+  renderQuestions();
+  updateProgress();
+</script>
+</body>
+</html>
